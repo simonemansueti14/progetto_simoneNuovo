@@ -1,0 +1,777 @@
+body {
+    background-color: #fffbea;
+}
+
+h1 {
+    color: #753422;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.bg-brown {
+    background-color: #5c3d2e; /* marrone caldo */
+}
+
+.logo {
+    max-height: 80px;
+}
+
+.menu-item {
+    color: #fff8dc; /* color panna (puoi modificarlo con un altro se preferisci) */
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: Verdana, sans-serif;;
+    text-decoration: none;
+}
+
+/* Al passaggio del mouse: sottolinea, ma non cambiare colore */
+.menu-item:hover {
+    text-decoration: underline;
+    color: #fff8dc; /* resta panna */
+}
+
+.top-bar,
+.menu-bar {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
+.logo-container {
+    z-index: 2;
+    position: relative;
+    background-color: #fff8dc;     /* sfondo bianco */
+    border-radius: 50%;          /* forma circolare */
+    width: 100px;                /* diametro */
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.logo {
+    max-width: 140px;             /* dimensione del logo dentro il cerchio */
+    max-height: 140px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* blocca scroll orizzontale */
+    box-sizing: border-box;
+    height: 100%;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+
+
+/* Logo con un piccolo delay extra */
+.animate-fade-in-delay {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.6s;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*-------------------------------------------------------------------------*/
+/* sezione Hero image */
+.hero-header {
+    background-color: #5c3d2e;
+    background-image: url('/img/pattern rettangolare marrone.jpeg');
+    background-repeat: repeat-x;
+    background-position: top center;
+    background-size: contain;
+    color: #fff8dc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.menu {
+    z-index: 2;
+    position: relative;
+    display: flex;
+    gap: 20px;
+}
+
+
+.hero-header .logo-img {
+    height: 70px;
+}
+
+.hero-header a {
+    color: #fff8dc;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.hero-header a:hover {
+    text-decoration: underline;
+}
+
+.hero-header .menu a {
+    font-size: 1.5rem;           /* aumenta la dimensione del testo */
+    margin-left: 18px;           /* distanza tra le voci */
+    margin-right: 18px;
+    color: #fff8dc;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: "Merriweather", serif;
+    position: relative;
+    top: -4px;                   /* alza il testo di 4px */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transition: color 0.3s ease;
+}
+
+.hero-header .menu a:hover {
+    text-decoration: underline;
+}
+
+.hero-carpediem {
+    position: relative; /* serve per i posizionamenti assoluti */
+    background-color: #5c3d2e;
+    color: #fffbea;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.pattern-icon {
+    position: absolute;
+    width: 300px;
+    opacity: 1;
+    z-index: 1;
+}
+
+.hero-title {
+    position: relative; /* necessario per il funzionamento dello z-index */
+    z-index: 2;
+    font-size: 8rem;
+    font-weight: 800;
+    color: #fff8dc;
+    font-family: 'Merriweather', serif;
+    margin-bottom: 1rem;
+    margin-top: -250px;
+    text-align: left;
+}
+
+.hero-subtitle {
+    position: relative; /* necessario per il funzionamento dello z-index */
+    z-index: 2;
+    font-size: 2rem;
+    margin-top: 1rem;
+    color: #fff8dc;
+    text-align: left;
+    font-family: 'Merriweather', serif;
+}
+
+.hero-deco {
+    max-width: 450px;
+}
+
+ /*
+.hero-image {
+    background-image: url('/img/home-hero.png');
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;           *//* larghezza piena dello schermo *//*
+    margin: 0;
+    padding: 0px;
+    margin-top: 0;
+}
+
+.hero-image-shorter {
+    background-image: url('/img/home-hero.png');
+    height: 50vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;           *//* larghezza piena dello schermo *//*
+    margin: 0;
+    padding: 0px;
+}*/
+
+/* se vuoi un effetto leggermente più opaco o scuro su questa */
+/*.repeat-hero {
+    opacity: 0.9; *//* opzionale, per far risaltare il contenuto sopra *//*
+}*/
+
+.carousel-hero-slide {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.4); /* sfondo trasparente scuro */
+    padding: 40px;
+    border-radius: 8px;
+}
+/*-------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------*/
+/* Sezione footer */
+
+.custom-footer {
+    background-color: #5c3d2e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: #fff8dc;
+
+}
+
+.footer-info p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.footer-social a:hover {
+    color: #fff8dc;
+}
+/*-------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------*/
+/* Sezione scopri birre */
+
+/* Dimensione dell'immagine del bicchiere */
+.img-bicchiere {
+    max-width: 250px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.row {
+    margin: 0 !important;
+}
+
+.birra-section {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.img-full {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.birra-img-wrapper {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.birra-img-wrapper:hover {
+    transform: translateY(-10px);
+}
+
+.birra-title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #5c3d2e;
+}
+
+.text-sxshifted {
+    padding-left: 2rem;
+}
+
+/*-------------------------------------------------------------------------*/
+/* Sezione degustazione */
+
+.degustazione-section {
+    /*background: linear-gradient(135deg, #fff8dc, #fff8dc);
+    border-radius: 0; /* Rimuove eventuali angoli stondati */
+    /*box-shadow: none; /* Elimina ombre che potrebbero causare distacco */
+    /*padding: 0;        /* 🔥 Rimuove padding sopra e sotto */
+    /*margin: 0;         /* 🔥 Se serve, rimuove margini */
+    /*overflow: hidden;  /* Evita traboccamenti */
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.degustazione-section .row {
+    margin: 0;         /* 🔥 Evita margini laterali */
+}
+
+.degustazione-img-wrapper {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.degustazione-img-wrapper:hover {
+    transform: translateY(-10px);
+}
+
+.img-degustazione {
+    max-width: 400px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.degustazione-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #5c3d2e;
+}
+
+.text-sxshifted {
+    padding-left: 2rem;
+}
+
+
+
+.degustazione-img-full {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+}
+
+
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/*-------------------------------------------------------------------------*/
+
+/*-------------------------------------------------------------------------*/
+/* Sezione eshop */
+.footer-address:hover {
+    text-decoration: underline;
+}
+
+/* Pulsanti usati nella home */
+.btn-birre {
+    background-color: #5c3d2e;
+    color: #fff8dc;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-birre:hover {
+    background-color: #3e281e;
+    transform: scale(1.05);
+}
+
+.text-sxshifted {
+    padding-left: 60px; /* Sposta il testo verso destra */
+}
+
+.eshop-section {
+    /*background: linear-gradient(135deg, #fff8dc, #fff8dc);
+    border-radius: 0; /* ← rimuove l’arrotondamento */
+    /*box-shadow: none; /* ← rimuove il bordo ombra */
+    /*margin-top: 0;
+    padding-top: 0;*/
+
+    
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+.eshop-img-wrapper {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.eshop-img-wrapper:hover {
+    transform: translateY(-10px);
+}
+
+.eshop-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #5c3d2e;
+}
+
+.eshop-img {
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.animate-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 767.98px) {
+    .eshop-section .row {
+        flex-direction: column;
+    }
+    
+    .object-fit-cover {
+        min-height: 300px;
+    }
+}
+/*-------------------------------------------------------------------------*/
+
+.pattern-separator {
+    height: 100px; /* o l’altezza che vuoi */
+    background-image: url('/img/pattern rettangolare giusto.jpeg'); /* percorso corretto */
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: center;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+    display: block;
+    min-height: 500px; /* Altezza minima garantita */
+}
+
+@media (max-width: 767.98px) {
+    .birra-section .row, 
+    .degustazione-section .row {
+        flex-direction: column;
+    }
+    
+    .order-md-1 {
+        order: -1;
+    }
+    
+    .object-fit-cover {
+        min-height: 300px;
+    }
+}
+
+.scroll-smooth {
+    scroll-behavior: smooth;
+}
+
+/***************************+PAGINA BIRRE+***************************/
+.birra-hero-section {
+    background-image: url('/img/bottiglie1.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* 💥 Effetto parallax */
+    height: 600px;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.birra-hero-section h2 {
+    z-index: 2;
+    position: relative;
+}
+
+/* Se vuoi scurire leggermente lo sfondo per leggere meglio il testo: */
+.birra-hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* overlay trasparente */
+    z-index: 1;
+}
+
+.birre-page img {
+    transition: transform 0.3s ease;
+}
+
+.birre-page img:hover {
+    transform: scale(1.05);
+}
+
+/**************************************************************************/
+/* Carosello Birre */
+.bottiglie-carousel {
+    scroll-behavior: smooth;
+}
+
+.lattine-carousel {
+    scroll-behavior: smooth;
+    margin-bottom: 200px;
+}
+
+.birra-col {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 500px;
+    gap: 0px;
+    transition: all 0.5s ease;
+}
+
+.birra-img {
+    width: 240px;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.birra-info {
+    /*flex: 1;*/ 
+    margin-top: 40px; /* aumenta il valore per abbassare di più */
+    max-width: 300px;
+}
+
+.birra-desc {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-height: 1.5em;
+    transition: all 0.5s ease;
+}
+
+.birra-col.expanded .birra-desc {
+    white-space: normal;
+    max-height: 300px;
+}
+
+.birra-col {
+    transition: margin-right 0.5s ease;
+    min-width: 500px;
+}
+
+.birra-col.expanded {
+    margin-right: 50px;
+}
+
+.section-title-bottiglie {
+    font-family: 'Merriweather', serif;
+    color: #000000;
+    margin-top: 30px;
+    margin-bottom: 80px;
+    border-bottom: 3px solid #000000;
+    display: inline-block;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.section-title-lattine {
+    font-family: 'Merriweather', serif;
+    color: #000000;
+    margin-top: 130px;
+    margin-bottom: 80px;
+    border-bottom: 3px solid #000000;
+    display: inline-block;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.lattina-img {
+    max-height: 240px; /* aumenta o regola a piacere */
+    width: auto;
+}
+
+.hero-birre-title {
+    font-family: 'Merriweather', serif;  /* oppure un altro font */
+    font-size: 4rem;                         /* regola la dimensione */
+    font-weight: 800;
+    color: #ffffff;                          /* colore testo */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);  /* ombra per risalto */
+    z-index: 2;
+    position: relative;
+}
+/**********************************************************************************/
+/* Pagina chi siamo */
+/* Titolo sezione in stile sito */
+.section-heading {
+  font-family: 'Merriweather', serif;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  border-bottom: 3px solid #000000;
+  color: #000000;
+  display: inline-block;
+  padding-bottom: 10px;
+  font-size: 2rem; /* più grande (default Bootstrap h2 ≈ 2rem) */
+
+}
+
+/* Ritardi comodi per le animazioni già presenti */
+.delay-1 { animation-delay: .15s; }
+.delay-2 { animation-delay: .30s; }
+.delay-3 { animation-delay: .45s; }
+
+/* (Opzionale) separatore un filo più alto qui */
+.pattern-separator { height: 90px; }
+/**********************************************************************************/
+/* Pagina contatti */
+.contact-card iframe {
+    width: 100%;
+    display: block;
+    border: none;
+}
+
+.contact-card {
+    background-color: #f3e9d2;      /* il beige che stai usando */
+    border-radius: 12px;
+    font-family: 'Merriweather', serif; /* <--- font personalizzato */
+}
+
+/* Titoli dentro le schede */
+.contact-card h4 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: 'Merriweather', serif;
+}
+
+/**********************************************************************************/
+
+.birra-quote {
+    font-family: 'Merriweather', serif; /* elegante */
+    font-size: 2.2rem;                      /* più grande */
+    font-weight: 800;                       /* molto marcato */
+    color: #5c3d2e;                         /* marrone coerente col tema */
+    text-align: center;                     /* centrato su mobile */
+    line-height: 1.3;
+}
+
+.degustazione-title {
+    font-family: 'Merriweather', serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #5c3d2e;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.eshop-title {
+    font-family: 'Merriweather', serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #5c3d2e;
+    text-align: center;
+    line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+    .birra-quote {
+        font-size: 2.8rem; /* ancora più grande su desktop */
+        text-align: left;  /* allineato a sinistra accanto all’immagine */
+    }
+}
+
+.chi-siamo-page {
+    font-family: 'Merriweather', serif;
+    font-size: 1.05rem; /* leggermente più grande del default */
+    line-height: 1.7;  /* più leggibile */
+}
+
+/*logo login***************/
+@media (min-width: 992px) {
+  .user-menu:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+  .user-menu .dropdown-toggle::after { display: none; }
+}
+
+/* Dropdown menu personalizzato */
+.dropdown-menu {
+  background-color: #fffbea !important; /* panna */
+  border: 1px solid #ddd;
+  min-width: 160px;         /* più stretto così non si taglia */
+  font-size: 0.8rem;        /* più piccolo */
+  padding: 0.25rem 0;
+  right: 0;                 /* forzalo ad allinearsi a destra dell'icona */
+  left: auto !important;    /* evita che spinga verso destra */
+}
+
+.dropdown-menu .dropdown-item {
+  color: #5c3d2e !important; 
+  padding: 0.3rem 0.8rem;   /* più compatto */
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #f0eacc;
+  color: #5c3d2e !important;
+}
+
+.auth-logo-wrapper {
+    background-color: var(--brand-card);
+    border-radius: 50%;
+    width: 140px;   /* più piccolo */
+    height: 140px;  /* stesso valore = cerchio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+/***********************/
+/***********titolo pagina prenotazioni************/
+
+.prenotazioni-title {
+  font-family: 'Merriweather', serif;
+  font-size: 2.2rem;
+  color: #000000;
+  font-weight: 700;
+}
+
+.prenotazioni-subtitle {
+  font-family: 'Merriweather', serif;
+  font-size: 1.2rem;
+  color: #000000;
+
+}
+/***********************/
