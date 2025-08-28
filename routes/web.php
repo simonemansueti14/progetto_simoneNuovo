@@ -46,6 +46,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Rotta per "Le mie prenotazioni" (solo utenti loggati)
+Route::middleware(['auth'])->get(
+    '/mie-prenotazioni',
+    [App\Http\Controllers\PrenotazioneController::class, 'mie']
+)->name('prenotazioni.mie');
+
+Route::middleware('auth')->delete(
+    '/mie-prenotazioni/{prenotazione}',
+    [PrenotazioneController::class, 'destroyMine']
+)->name('prenotazioni.mine.destroy');
 /*
 |--------------------------------------------------------------------------
 | Area Utente con middleware personalizzato

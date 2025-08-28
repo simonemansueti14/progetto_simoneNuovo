@@ -65,13 +65,16 @@
                                 @endguest
 
                                 @auth
-                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">Profilo</a>
+                                    <a class="dropdown-item" href="{{ route('prenotazioni.mie') }}">
+                                        Le tue prenotazioni
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
                                 @endauth
+
                             </div>
                         </div>
                     </nav>
