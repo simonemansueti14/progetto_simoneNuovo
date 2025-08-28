@@ -8,16 +8,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Prenotazione;
+
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request)
     {
+        $user = $request->user();
+
+        $prenotazioni = Prenotazione::where('user_id', $user->id)
+            ->orderByDesc('giorno')
+            ->orderBy('orario')
+            ->get();
+
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user'          => $user,
+            'prenotazioni'  => $prenotazioni,
         ]);
     }
 

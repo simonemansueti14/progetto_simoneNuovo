@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BirraController; // <-- SBLOCCATO
+use App\Http\Controllers\BirraController;
 use App\Http\Controllers\PrenotazioneController;
 
 /*
@@ -12,24 +12,20 @@ use App\Http\Controllers\PrenotazioneController;
 */
 
 Route::get('/', fn () => view('home'))->name('home');
-// Route::get('/', fn () => view('welcome'))->name('home'); // alternativa
-
 Route::view('/chi-siamo', 'chi-siamo')->name('chi-siamo');
 Route::view('/contatti', 'contatti')->name('contatti');
 
 Route::get('/prenotazioni', function () {
     return view('prenotazioni.index');
 })->name('prenotazioni');
-Route::post('/prenotazioni', [App\Http\Controllers\PrenotazioneController::class, 'store'])
+
+Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])
     ->middleware('auth')
     ->name('prenotazioni.store');
 
-// Lista birre (PUBBLICA) -> usata dalla navbar con route('birre.index')
+// Lista birre (PUBBLICA)
 Route::get('/birre', [BirraController::class, 'index'])->name('birre.index');
 
-Route::get('/admin/prenotazioni', [PrenotazioneController::class, 'index'])
-    ->middleware(['auth', 'is_admin'])
-    ->name('admin.prenotazioni.index');
 /*
 |--------------------------------------------------------------------------
 | Dashboard (Breeze) – utente verificato
@@ -38,7 +34,6 @@ Route::get('/admin/prenotazioni', [PrenotazioneController::class, 'index'])
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 /*
 |--------------------------------------------------------------------------
@@ -51,21 +46,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-
-Route::delete('/admin/prenotazioni/{prenotazione}', [PrenotazioneController::class, 'destroy'])
-    ->middleware(['auth','is_admin'])
-    ->name('admin.prenotazioni.destroy');
-
 /*
 |--------------------------------------------------------------------------
-| (Opzionale) Area Utente con middleware personalizzato
+| Area Utente con middleware personalizzato
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'is_user'])->group(function () {
-    // Route::get('/i-miei-ordini', [OrderController::class, 'index'])->name('orders.index');
+    // esempio: Route::get('/i-miei-ordini', [OrderController::class, 'index'])->name('orders.index');
 });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -78,11 +66,13 @@ Route::middleware(['auth', 'is_admin'])
     ->group(function () {
         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
 
-        // Esempi CRUD admin (LASCIA COMMENTATI se non li stai usando)
-        // Route::resource('prodotti', Admin\ProductController::class);
+        // Prenotazioni (admin)
+        Route::get('/prenotazioni', [PrenotazioneController::class, 'index'])->name('prenotazioni.index');
+        Route::delete('/prenotazioni/{prenotazione}', [PrenotazioneController::class, 'destroy'])->name('prenotazioni.destroy');
+
+        // Qui puoi aggiungere altre resource CRUD admin
         // Route::resource('birre', Admin\BirraController::class)->except(['show']);
     });
-
 
 /*
 |--------------------------------------------------------------------------

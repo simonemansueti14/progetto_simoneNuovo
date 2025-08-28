@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return in_array($this->role, [self::ROLE_USER, self::ROLE_ADMIN], true);
     }
+
+    public function prenotazioni()
+    {
+        return $this->hasMany(\App\Models\Prenotazione::class);
+    }
 }

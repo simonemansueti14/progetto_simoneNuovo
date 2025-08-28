@@ -5,19 +5,22 @@
 <div class="container py-5" style="max-width: 760px">
 
   {{-- Titolo principale --}}
-  <h1 class="prenotazioni-title text-center mb-4">Prenota la tua degustazione!</h1>
-  <p class="prenotazioni-subtitle text-center mb-4">
-    Compila il form sottostante per scegliere data e orario della tua prenotazione. Siamo aperti
-    dal martedì al giovedì dalle 18:00 alle 22:00, e dal venerdì alla domenica dalle 16:00 alle 22:00.
-  </p>
+  <h1 class="text-center mb-4 prenotazioni-title">Prenota la tua degustazione!</h1>
+  <h2 class="text-center mb-4 prenotazioni-subtitle">Siamo aperti dal martedì al 
+    giovedì dalle 18:00 alle 22:00, e dal venerdi alla domenica dalle 16:00 alle 22:00 <br>
+    Scegli una data e un orario, al resto ci pensiamo noi!
+  </h2>
+  <h3 class="text-center mb-4 prenotazioni-subsubtitle">Si accettano prenotazioni per un numero minimo di 4 persone.</h3>
 
-  {{-- SBARRAMENTO per i non autenticati --}}
   @guest
+    {{-- SBARRAMENTO per i non autenticati --}}
     <div class="card shadow-sm" style="background-color:#f0eacc;">
       <div class="card-body text-center p-4">
         <p class="mb-4 fs-5">Per entrare nella pagina prenotazioni è necessario il login.</p>
         <div class="d-flex justify-content-center gap-3">
-          <a href="{{ route('login', ['redirectTo' => route('prenotazioni')]) }}" class="btn btn-primary">Accedi</a>
+          <a href="{{ route('login', ['redirectTo' => route('prenotazioni')]) }}" class="btn btn-primary">
+            Accedi
+          </a>
           @if (Route::has('register'))
             <a href="{{ route('register') }}" class="btn btn-outline-dark">Registrati</a>
           @endif
@@ -30,6 +33,9 @@
     {{-- Messaggi --}}
     @if (session('success'))
       <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if (session('status'))
+      <div class="alert alert-success">{{ session('status') }}</div>
     @endif
 
     {{-- Errori --}}
@@ -82,13 +88,17 @@
         {{-- Numero ospiti --}}
         <div class="mb-3">
           <label for="posti" class="form-label">Numero di ospiti</label>
-          <input type="number"
-                 id="posti"
-                 name="posti"
-                 min="1" max="50"
-                 class="form-control @error('posti') is-invalid @enderror"
-                 value="{{ old('posti') }}"
-                 required>
+          <select id="posti"
+        name="posti"
+        class="form-select @error('posti') is-invalid @enderror"
+        required>
+  @for ($i = 4; $i <= 50; $i++)
+    <option value="{{ $i }}" {{ old('posti') == $i ? 'selected' : '' }}>
+      {{ $i }}
+    </option>
+  @endfor
+</select>
+
           @error('posti') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
@@ -118,6 +128,7 @@
         const selectOra   = document.getElementById('orario');
         const helpOra     = document.getElementById('orarioHelp');
 
+        // Genera uno slot ogni 30 minuti tra start e end (stringhe "HH:MM")
         function generateSlots(start, end) {
           const slots = [];
           const [sh, sm] = start.split(':').map(Number);
@@ -137,14 +148,24 @@
         }
 
         function fillTimeOptions(dayOfWeek) {
+          // dayOfWeek: 0=Dom, 1=Lun, 2=Mar, 3=Mer, 4=Gio, 5=Ven, 6=Sab
           let range = null;
-          if (dayOfWeek === 1) {
+
+          if (dayOfWeek === 1) { // Monday
+            // lunedì: non selezionabile
             selectOra.innerHTML = '<option value="">Il lunedì siamo chiusi</option>';
             selectOra.disabled = true;
             return;
           }
-          if (dayOfWeek >= 2 && dayOfWeek <= 4) range = ['18:00', '22:00'];
-          if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) range = ['16:00', '22:00'];
+
+          // mar(2)-gio(4): 18:00-22:00
+          if (dayOfWeek >= 2 && dayOfWeek <= 4) {
+            range = ['18:00', '22:00'];
+          }
+          // ven(5)-dom(0): 16:00-22:00
+          if (dayOfWeek === 5 || dayOfWeek === 6 || dayOfWeek === 0) {
+            range = ['16:00', '22:00'];
+          }
 
           if (!range) {
             selectOra.innerHTML = '<option value="">Nessun orario disponibile</option>';
@@ -169,7 +190,7 @@
           }
 
           const d = new Date(inputGiorno.value);
-          const dow = d.getDay();
+          const dow = d.getDay(); // 0=Dom...1=Lun...6=Sab
           const isMonday = dow === 1;
 
           if (isMonday) {
@@ -182,6 +203,8 @@
             inputGiorno.setCustomValidity('');
             helpGiorno.textContent = '';
             fillTimeOptions(dow);
+
+            // Recupera l'eventuale old('orario') dal data-attribute del select
             const oldTime = selectOra.dataset.old || '';
             if (oldTime) {
               const opt = Array.from(selectOra.options).find(o => o.value === oldTime);
@@ -191,77 +214,17 @@
         }
 
         inputGiorno.addEventListener('change', onDayChange);
+
+        // Inizializzazione: se esiste già un giorno (old value), popola subito
         onDayChange();
       });
     </script>
 
-    {{-- ===================== ELENCO PRENOTAZIONI (SOLO ADMIN, INLINE) ===================== --}}
-    @if(auth()->check() && auth()->user()->role === 'admin' && isset($prenotazioni))
-      <hr class="my-5">
-      <h2 class="mb-3">Tutte le prenotazioni</h2>
-
-      <div class="card shadow-sm">
-        <div class="card-body p-0">
-          <table class="table table-striped table-hover mb-0">
-            <thead class="table-dark">
-              <tr>
-                <th>Giorno</th>
-                <th>Orario</th>
-                <th>Ospiti</th>
-                <th>Nome</th>
-                <th>Note</th>
-                <th>Creata il</th>
-                <th class="text-end">Azioni</th>
-              </tr>
-            </thead>
-            <tbody>
-              @forelse($prenotazioni as $p)
-                <tr>
-                  <td>{{ \Illuminate\Support\Carbon::parse($p->giorno)->format('d/m/Y') }}</td>
-                  <td>{{ \Illuminate\Support\Carbon::createFromTimeString($p->orario)->format('H:i') }}</td>
-                  <td>{{ $p->posti }}</td>
-                  <td>
-                    {{ $p->nome }}
-                    @if($p->user && $p->user->email)
-                      <div class="small text-muted">{{ $p->user->email }}</div>
-                    @endif
-                  </td>
-                  <td>{{ $p->note }}</td>
-                  <td>{{ optional($p->created_at)->format('d/m/Y H:i') }}</td>
-                  <td class="text-end">
-                    {{-- Pulsante modifica (placeholder) --}}
-                    <a href="#" class="btn btn-sm btn-outline-secondary me-1" title="Modifica">✎</a>
-
-                    {{-- Pulsante elimina --}}
-                   <form method="POST"
-      action="{{ route('admin.prenotazioni.destroy', $p) }}"
-      class="d-inline"
-      onsubmit="return confirm('Confermi l\'eliminazione della prenotazione di {{ addslashes($p->nome) }} del {{ date('d/m/Y', strtotime($p->giorno)) }} alle {{ date('H:i', strtotime($p->orario)) }}?');">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger" title="Elimina">✖</button>
-</form>
-
-
-                  </td>
-                </tr>
-              @empty
-                <tr>
-                  <td colspan="7" class="text-center py-4">Nessuna prenotazione presente.</td>
-                </tr>
-              @endforelse
-            </tbody>
-          </table>
-        </div>
-      </div>
-    @endif
-    {{-- =================== /ELENCO PRENOTAZIONI (SOLO ADMIN, INLINE) ==================== --}}
-
-    {{-- FAB admin che porta alla pagina dedicata --}}
+    {{-- FAB admin esistente --}}
     @if(auth()->check() && auth()->user()->role === 'admin')
       <a href="{{ route('admin.prenotazioni.index') }}"
-         class="btn btn-dark admin-fab"
-         title="Vedi tutte le prenotazioni">📋</a>
+        class="btn btn-dark admin-fab"
+        title="Vedi tutte le prenotazioni">📋</a>
 
       <style>
         .admin-fab{
@@ -275,6 +238,67 @@
         }
         .admin-fab:hover{ transform: translateY(-1px); }
       </style>
+    @endif
+
+    {{-- TABELLA ADMIN con Azioni (mostrata solo se admin e $prenotazioni è passato dal controller) --}}
+    @if(auth()->user()->role === 'admin' && isset($prenotazioni))
+      <hr class="my-5">
+      <h2 class="h5 mb-3">Gestione prenotazioni</h2>
+
+      @if($prenotazioni->count() === 0)
+        <div class="alert alert-info">Nessuna prenotazione presente.</div>
+      @else
+        <div class="table-responsive">
+          <table class="table table-striped align-middle">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Giorno</th>
+                <th>Orario</th>
+                <th>Posti</th>
+                <th>Utente/Email</th>
+                <th class="text-end">Azioni</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($prenotazioni as $p)
+                <tr>
+                  <td>{{ $p->nome }}</td>
+                  <td>{{ $p->giorno }}</td>
+                  <td>{{ $p->orario }}</td>
+                  <td>{{ $p->posti }}</td>
+                  <td>
+                    @php
+                      $email = optional($p->user)->email ?? $p->email ?? '';
+                    @endphp
+                    {{ $email }}
+                  </td>
+<td class="text-end text-nowrap">
+
+
+  {{-- Pulsante elimina con conferma (senza @json/addslashes) --}}
+  @php
+    $msg = "Confermi l'eliminazione della prenotazione di {$p->nome} del {$p->giorno} alle {$p->orario}?";
+  @endphp
+  <form
+      action="{{ route('prenotazioni.destroy', $p->id) }}"
+      method="POST"
+      class="d-inline"
+      data-confirm="{{ e($msg) }}"
+      onsubmit="return confirm(this.dataset.confirm);">
+      @csrf
+      @method('DELETE')
+      <button type="submit" class="btn btn-sm btn-danger">
+        <i class="bi bi-x-lg"></i>
+      </button>
+  </form>
+</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      @endif
     @endif
 
   @endauth

@@ -1,18 +1,16 @@
 @component('mail::message')
-# Prenotazione annullata
+# Cancellazione prenotazione
 
 Ciao {{ $p->nome }},
 
-ti informiamo che la tua prenotazione è stata annullata.
+la tua prenotazione è stata **annullata dall’amministratore**.
 
-**Dettagli**
-- Giorno: {{ \Illuminate\Support\Carbon::parse($p->giorno)->format('d/m/Y') }}
-- Orario: {{ \Illuminate\Support\Carbon::createFromTimeString($p->orario)->format('H:i') }}
-- Ospiti: {{ $p->posti }}
-- Note: {{ $p->note ?? '—' }}
+- Giorno: {{ $p->giorno }}
+- Orario: {{ $p->orario }}
+- Posti: {{ $p->posti }}
 
-Se hai bisogno di assistenza, rispondi a questa email.
+Se hai domande puoi rispondere a questa email.
 
 Grazie,  
-{{ config('app.name') }}
+Lo Staff
 @endcomponent
