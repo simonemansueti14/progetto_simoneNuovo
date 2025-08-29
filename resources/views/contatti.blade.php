@@ -12,7 +12,7 @@
         <!-- Riquadro 1 - Telefono ed Email -->
         <div class="col-12">
             <div class="contact-card shadow-sm p-4">
-                <h4 class="mb-3 fs-3"><strong>Contattaci</strong></h4>
+                <h4 class="mb-3 fs-3 dati-card"><strong>Contattaci</strong></h4>
                 <p><strong>Telefono:</strong> +39 339 366 5044</p>
                 <p><strong>Telefono:</strong> +39 335 808 8404</p>
                 <p><strong>Email:</strong> birrificio.carpediem@gmail.com</p>

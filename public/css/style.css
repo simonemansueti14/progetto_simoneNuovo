@@ -30,6 +30,45 @@ h1 {
     color: #fff8dc; /* resta panna */
 }
 
+.hero-static {
+  position: relative;
+  height: 90vh;
+  background-image: url('/img/home-hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* effetto parallax */
+  position: relative;
+  color: #fff; /* testo bianco */
+}
+
+.hero-text {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 800px;
+  padding: 20px;
+  background: rgba(249, 246, 232, 0.9); /* sfondo trasparente per leggibilità */
+  border-radius: 10px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  font-family: 'Outfit', serif;
+  color: #5c3d2e;
+}
+
+.hero-text p {
+  font-size: 1.5rem;
+  font-family: 'Outfit', serif;
+  color: #5c3d2e;
+}
+
+
 .top-bar,
 .menu-bar {
     margin-bottom: 0;
@@ -88,11 +127,8 @@ main {
 /*-------------------------------------------------------------------------*/
 /* sezione Hero image */
 .hero-header {
-    background-color: #5c3d2e;
-    background-image: url('/img/pattern rettangolare marrone.jpeg');
-    background-repeat: repeat-x;
-    background-position: top center;
-    background-size: contain;
+    background-color: #5c3d2e !important; /* monocolore */
+    background-image: none !important;    /* niente pattern */
     color: #fff8dc;
     display: flex;
     justify-content: space-between;
@@ -101,6 +137,8 @@ main {
     position: relative;
     z-index: 1;
 }
+
+
 
 .menu {
     z-index: 2;
@@ -126,23 +164,23 @@ main {
     text-decoration: underline;
 }
 
-.hero-header .menu a {
-    font-size: 1.5rem;           /* aumenta la dimensione del testo */
-    margin-left: 18px;           /* distanza tra le voci */
-    margin-right: 18px;
-    color: #fff8dc;
-    font-weight: bold;
-    text-decoration: none;
-    font-family: "Merriweather", serif;
-    position: relative;
-    top: -4px;                   /* alza il testo di 4px */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    transition: color 0.3s ease;
+
+/* SOLO i link principali della navbar (figli diretti di .menu) */
+.hero-header .menu > a {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.5rem;     /* più piccolo del 1.5rem di prima */
+  font-weight: 500;      /* non bold */
+  color: #fff8dc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin: 0 10px;
 }
 
-.hero-header .menu a:hover {
-    text-decoration: underline;
+.hero-header .menu > a:hover {
+  text-decoration: underline;
+  color: #fff8dc;
 }
+
 
 .hero-carpediem {
     position: relative; /* serve per i posizionamenti assoluti */
@@ -165,7 +203,7 @@ main {
     font-size: 8rem;
     font-weight: 800;
     color: #fff8dc;
-    font-family: 'Merriweather', serif;
+    font-family: 'Outfit', serif;
     margin-bottom: 1rem;
     margin-top: -250px;
     text-align: left;
@@ -178,7 +216,7 @@ main {
     margin-top: 1rem;
     color: #fff8dc;
     text-align: left;
-    font-family: 'Merriweather', serif;
+    font-family: 'Outfit', serif;
 }
 
 .hero-deco {
@@ -235,10 +273,25 @@ main {
 /* Sezione footer */
 
 .custom-footer {
-    background-color: #5c3d2e;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #fff8dc;
+    background-color: #5c3d2e; /* marrone */
+    color: #fff8dc;           /* panna */
+    font-family: Verdana, sans-serif;
+}
 
+.custom-footer .footer-info p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #fff8dc; /* testo panna */
+}
+
+.custom-footer .footer-social a {
+    color: #fff8dc;   /* social panna */
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.custom-footer .footer-social a:hover {
+    color: #f0eacc; /* colore un po’ più chiaro al passaggio */
 }
 
 .footer-info p {
@@ -347,6 +400,29 @@ main {
     color: #5c3d2e;
 }
 
+.contatti-section .row {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.custom-footer { 
+  margin-top: 0 !important;
+}
+
+.degustazione-subtitle {
+    color: #5c3d2e;
+}
+
+.scopribirre-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #5c3d2e;
+}
+
+.scopribirre-subtitle {
+    color: #5c3d2e;
+}
+
 .text-sxshifted {
     padding-left: 2rem;
 }
@@ -397,6 +473,7 @@ main {
 .btn-birre:hover {
     background-color: #3e281e;
     transform: scale(1.05);
+    color: #fff8dc !important;
 }
 
 .text-sxshifted {
@@ -594,11 +671,11 @@ html, body {
 }
 
 .section-title-bottiglie {
-    font-family: 'Merriweather', serif;
-    color: #000000;
+    font-family: 'Outfit', serif;
+    color: #5c3d2e;
     margin-top: 30px;
     margin-bottom: 80px;
-    border-bottom: 3px solid #000000;
+    border-bottom: 3px solid #5c3d2e;
     display: inline-block;
     padding-bottom: 10px;
     letter-spacing: 1px;
@@ -606,11 +683,11 @@ html, body {
 }
 
 .section-title-lattine {
-    font-family: 'Merriweather', serif;
-    color: #000000;
+    font-family: 'Outfit', serif;
+    color: #5c3d2e;
     margin-top: 130px;
     margin-bottom: 80px;
-    border-bottom: 3px solid #000000;
+    border-bottom: 3px solid #5c3d2e;
     display: inline-block;
     padding-bottom: 10px;
     letter-spacing: 1px;
@@ -623,24 +700,92 @@ html, body {
 }
 
 .hero-birre-title {
-    font-family: 'Merriweather', serif;  /* oppure un altro font */
-    font-size: 4rem;                         /* regola la dimensione */
+    font-family: 'Outfit', serif;  /* oppure un altro font */
+    font-size: 3rem;                         /* regola la dimensione */
     font-weight: 800;
-    color: #ffffff;                          /* colore testo */
+    color: #fffbea;                          /* colore testo */
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);  /* ombra per risalto */
     z-index: 2;
     position: relative;
 }
+
+/*****************************font schede birre*****************************************************/
+/* Scrollbar visibile e personalizzata sui caroselli */
+.beer-carousel, 
+.bottiglie-carousel{
+    display: flex;                  /* 🔑 allinea gli item in riga */
+    align-items: flex-start;        /* evita spazi in verticale */
+    overflow-x: scroll !important;  /* sempre visibile */
+    overflow-y: hidden !important;  /* nascondi verticale */
+    scrollbar-width: thin;          /* Firefox */
+    scrollbar-color: #5c3d2e #fffbea; /* marrone + panna */
+    height: 500px;
+}
+
+
+
+.lattine-carousel {
+    display: flex;                  /* 🔑 allinea gli item in riga */
+    align-items: flex-start;        /* evita spazi in verticale */
+    overflow-x: scroll !important;  /* sempre visibile */
+    overflow-y: hidden !important;  /* nascondi verticale */
+    scrollbar-width: thin;          /* Firefox */
+    scrollbar-color: #5c3d2e #fffbea; /* marrone + panna */
+    height: 400px;
+    padding-bottom: 10px;
+}
+
+
+
+
+
+
+/**********************************************************************************/
+
+
+
+/*****************************font schede birre*****************************************************/
+/* ---- Pagina Birre (carousel) ---- */
+.beer-item .beer-name{
+  font-family: "Merriweather", serif;   /* o il font che preferisci */
+  font-weight: 800;                     /* più sottile? usa 600 o 500 */
+  color: #5c3d2e;                       /* marrone del tema */
+  letter-spacing: .5px;
+  margin-top: .5rem;
+  margin-bottom: .25rem;
+}
+
+.beer-item .beer-type{
+  font-family: "Merriweather", serif;   /* o sans-serif se vuoi */
+  font-weight: 600;                     /* più leggero? prova 500/400 */
+  color: #5c3d2e;
+  opacity: .85;                         /* leggermente più soft */
+  margin: 0;
+  text-transform: uppercase;            /* togli se non ti serve */
+  font-size: 0.95rem;
+}
+
+/* Se in futuro aggiungi i “dati” (ABV/IBU/EBC) */
+.beer-item .beer-stats{
+  font-family: "Merriweather", serif;
+  font-weight: 500;
+  color: #5c3d2e;
+  font-size: .95rem;
+  margin-top: .25rem;
+}
+
+/**********************************************************************************/
+
 /**********************************************************************************/
 /* Pagina chi siamo */
 /* Titolo sezione in stile sito */
 .section-heading {
-  font-family: 'Merriweather', serif;
+  font-family: 'Outfit', serif;
   font-weight: 800;
   letter-spacing: .5px;
   text-transform: uppercase;
-  border-bottom: 3px solid #000000;
-  color: #000000;
+  border-bottom: 3px solid #5c3d2e;
+  color: #5c3d2e;
   display: inline-block;
   padding-bottom: 10px;
   font-size: 2rem; /* più grande (default Bootstrap h2 ≈ 2rem) */
@@ -665,20 +810,29 @@ html, body {
 .contact-card {
     background-color: #f3e9d2;      /* il beige che stai usando */
     border-radius: 12px;
-    font-family: 'Merriweather', serif; /* <--- font personalizzato */
+    font-family: 'Outfit', serif; /* <--- font personalizzato */
 }
 
 /* Titoli dentro le schede */
 .contact-card h4 {
     font-size: 1.6rem;
     font-weight: 700;
-    font-family: 'Merriweather', serif;
+    font-family: 'Outfit', serif;
+    color:#5c3d2e;
 }
+
+.contact-card p {
+    color: #5c3d2e;   /* colore marrone (o quello che vuoi) */
+    font-family: 'Outfit', sans-serif; /* se vuoi cambiare anche font */
+    font-size: 1rem;  /* puoi regolare la dimensione */
+}
+
+
 
 /**********************************************************************************/
 
 .birra-quote {
-    font-family: 'Merriweather', serif; /* elegante */
+    font-family: 'Outfit', serif; /* elegante */
     font-size: 2.2rem;                      /* più grande */
     font-weight: 800;                       /* molto marcato */
     color: #5c3d2e;                         /* marrone coerente col tema */
@@ -687,7 +841,7 @@ html, body {
 }
 
 .degustazione-title {
-    font-family: 'Merriweather', serif;
+    font-family: 'Outfit', serif;
     font-size: 2.2rem;
     font-weight: 800;
     color: #5c3d2e;
@@ -696,7 +850,7 @@ html, body {
 }
 
 .eshop-title {
-    font-family: 'Merriweather', serif;
+    font-family: 'Outfit', serif;
     font-size: 2.2rem;
     font-weight: 800;
     color: #5c3d2e;
@@ -712,9 +866,10 @@ html, body {
 }
 
 .chi-siamo-page {
-    font-family: 'Merriweather', serif;
+    font-family: 'Outfit', serif;
     font-size: 1.05rem; /* leggermente più grande del default */
     line-height: 1.7;  /* più leggibile */
+    color: #5c3d2e;
 }
 
 /*logo login***************/
@@ -728,23 +883,47 @@ html, body {
 
 /* Dropdown menu personalizzato */
 .dropdown-menu {
-  background-color: #fffbea !important; /* panna */
+  background-color: #fffbea !important;
   border: 1px solid #ddd;
-  min-width: 160px;         /* più stretto così non si taglia */
-  font-size: 0.8rem;        /* più piccolo */
+  min-width: 160px;
+  font-size: 0.9rem;
   padding: 0.25rem 0;
-  right: 0;                 /* forzalo ad allinearsi a destra dell'icona */
-  left: auto !important;    /* evita che spinga verso destra */
+  right: 0;
+  left: auto !important;
+
+  /* elimina il bg hover di Bootstrap */
+  --bs-dropdown-link-hover-bg: transparent;
+}
+
+.dropdown-menu .dropdown-item,
+.dropdown-menu button.dropdown-item {
+  color: #5c3d2e !important;
+  font-size: 0.9rem;         /* stessa grandezza per tutte */
+  font-weight: 400;
+  text-shadow: none !important;
+  background: none !important;
+  transition: none !important;
+  padding: 0.4rem 0.8rem;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu button.dropdown-item:hover {
+  text-decoration: underline;
+  color: #5c3d2e !important;
+  background: none !important;
 }
 
 .dropdown-menu .dropdown-item {
-  color: #5c3d2e !important; 
-  padding: 0.3rem 0.8rem;   /* più compatto */
-}
-
-.dropdown-menu .dropdown-item:hover {
-  background-color: #f0eacc;
   color: #5c3d2e !important;
+  font-size: 0.9rem;
+  font-weight: normal;
+  background: none !important;
+  transition: none !important;
+}
+.dropdown-menu .dropdown-item:hover {
+  text-decoration: underline;
+  color: #5c3d2e !important;
+  background: none !important;
 }
 
 .auth-logo-wrapper {
@@ -762,23 +941,24 @@ html, body {
 /***********titolo pagina prenotazioni************/
 
 .prenotazioni-title {
-  font-family: 'Merriweather', serif;
+  font-family: 'Outfit', serif;
   font-size: 2.2rem;
-  color: #000000;
+  color: #5c3d2e;
   font-weight: 700;
 }
 
 .prenotazioni-subtitle {
-  font-family: 'Merriweather', serif;
+  font-family: 'Outfit', serif;
   font-size: 1.2rem;
-  color: #000000;
+  color: #5c3d2e;
 
 }
 
 .prenotazioni-subsubtitle {
-  font-family: 'Merriweather', serif;
+  font-family: 'Outfit', serif;
   font-size: 0.9rem;
-  color: #000000;
+  color: #5c3d2e;
 
 }
+
 /***********************/

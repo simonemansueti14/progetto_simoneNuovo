@@ -12,7 +12,7 @@
     <!-- Titolo "Le nostre birre" -->
     <div class="row justify-content-center mb-4">
         <div class="col-md-8 text-center">
-            <h2 class="display-5 fw-bold section-title-bottiglie">Le nostre birre</h2>
+            <h2 class="display-5 fw-bold section-title-bottiglie">Le birre</h2>
         </div>
     </div>
 
@@ -159,7 +159,7 @@
 
     <div class="row justify-content-center mb-4 mt-5">
     <div class="col-md-8 text-center">
-        <h2 class="display-5 fw-bold section-title-lattine">Le nostre lattine</h2>
+        <h2 class="display-5 fw-bold section-title-lattine">Le lattine</h2>
     </div>
 </div>
 

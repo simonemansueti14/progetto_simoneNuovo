@@ -6,7 +6,7 @@
 <div class="container py-5 chi-siamo-page">
 
     <!-- Titolo -->
-    <h2 class="text-center mb-5 section-heading animate-fade-in">Il Birrificio</h2>
+    <h2 class="text-center mb-5 section-heading animate-fade-in ">Il Birrificio</h2>
 
     <!-- Riga 1 -->
     <div class="row align-items-center mb-5 animate-fade-in delay-1">

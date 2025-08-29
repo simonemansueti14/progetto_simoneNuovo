@@ -16,11 +16,12 @@
     {{-- SBARRAMENTO per i non autenticati --}}
     <div class="card shadow-sm" style="background-color:#f0eacc;">
       <div class="card-body text-center p-4">
-        <p class="mb-4 fs-5">Per entrare nella pagina prenotazioni è necessario il login.</p>
+        <p class="mb-4 fs-5">Per effettuare una prenotazione è necessario il login.</p>
         <div class="d-flex justify-content-center gap-3">
-          <a href="{{ route('login', ['redirectTo' => route('prenotazioni')]) }}" class="btn btn-primary">
-            Accedi
+          <a href="{{ route('login', ['redirectTo' => route('prenotazioni')]) }}" class="btn btn-birre">
+              Accedi
           </a>
+
           @if (Route::has('register'))
             <a href="{{ route('register') }}" class="btn btn-outline-dark">Registrati</a>
           @endif
@@ -115,8 +116,9 @@
 
         {{-- Conferma --}}
         <div class="text-center">
-          <button type="submit" class="btn btn-primary">Conferma prenotazione</button>
+          <button type="submit" class="btn btn-birre">Conferma prenotazione</button>
         </div>
+
       </div>
     </form>
 
