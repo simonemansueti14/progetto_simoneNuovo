@@ -50,6 +50,12 @@
                             @endcan
                         @endauth
 
+                        @auth
+                            @if(auth()->user()->role === 'admin')
+                                <a href="{{ route('admin.utenti.index') }}">Utenti</a>
+                            @endif
+                        @endauth
+
                         {{-- Icona utente con dropdown --}}
                         <div class="dropdown user-menu">
                             <a href="#" class="nav-link d-inline-flex align-items-center"
@@ -98,6 +104,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+    @yield('scripts')
+
 </body>
 </html>

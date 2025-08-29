@@ -4,13 +4,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BirraController;
 use App\Http\Controllers\PrenotazioneController;
+use App\Http\Controllers\Admin\UserController as AdminUserController; // << aggiunto
 
 /*
 |--------------------------------------------------------------------------
 | Rotte Pubbliche (guest)
 |--------------------------------------------------------------------------
 */
-
 Route::get('/', fn () => view('home'))->name('home');
 Route::view('/chi-siamo', 'chi-siamo')->name('chi-siamo');
 Route::view('/contatti', 'contatti')->name('contatti');
@@ -49,13 +49,14 @@ Route::middleware('auth')->group(function () {
 // Rotta per "Le mie prenotazioni" (solo utenti loggati)
 Route::middleware(['auth'])->get(
     '/mie-prenotazioni',
-    [App\Http\Controllers\PrenotazioneController::class, 'mie']
+    [PrenotazioneController::class, 'mie']
 )->name('prenotazioni.mie');
 
 Route::middleware('auth')->delete(
     '/mie-prenotazioni/{prenotazione}',
     [PrenotazioneController::class, 'destroyMine']
 )->name('prenotazioni.mine.destroy');
+
 /*
 |--------------------------------------------------------------------------
 | Area Utente con middleware personalizzato
@@ -80,8 +81,10 @@ Route::middleware(['auth', 'is_admin'])
         Route::get('/prenotazioni', [PrenotazioneController::class, 'index'])->name('prenotazioni.index');
         Route::delete('/prenotazioni/{prenotazione}', [PrenotazioneController::class, 'destroy'])->name('prenotazioni.destroy');
 
-        // Qui puoi aggiungere altre resource CRUD admin
-        // Route::resource('birre', Admin\BirraController::class)->except(['show']);
+        // Utenti (admin)  << aggiunto
+        Route::get('/utenti', [AdminUserController::class, 'index'])->name('utenti.index');
+        Route::delete('/utenti/{user}', [AdminUserController::class, 'destroy'])->name('utenti.destroy');
+
     });
 
 /*

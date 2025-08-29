@@ -120,33 +120,29 @@ class PrenotazioneController extends Controller
 
    public function destroyMine(\App\Models\Prenotazione $prenotazione): \Illuminate\Http\RedirectResponse
     {
-        // Solo il proprietario può cancellare
+        // Solo il proprietario può cancellare la propria prenotazione
         if ($prenotazione->user_id !== Auth::id()) {
             abort(403, 'Non autorizzato.');
         }
 
-        // ---- destinatari admin ----
-        // 1) prova a leggere da .env (lista separata da virgole)
-        $fromEnv = (string) env('MAIL_ADMIN_RECIPIENTS', '');
-        $adminList = collect(array_filter(array_map('trim', explode(',', $fromEnv))));
+        // Recupera tutti gli admin
+        $admins = \App\Models\User::where('role', 'admin')->get();
 
-        // 2) fallback: tutti gli utenti con role=admin
-        if ($adminList->isEmpty()) {
-            $adminList = User::where('role', User::ROLE_ADMIN)->pluck('email');
-        }
-
-        // Manda email SOLO agli admin (NIENTE all'utente)
-        if ($adminList->isNotEmpty()) {
-            Mail::to($adminList->all())->send(
-                new PrenotazioneEliminataDaUtenteMail($prenotazione, Auth::user())
-            );
+        foreach ($admins as $admin) {
+            if ($admin->email) {
+                Mail::to($admin->email)->send(new PrenotazioneCancellataMail($prenotazione));
+            }
         }
 
         // Cancella la prenotazione
         $prenotazione->delete();
 
-        return back()->with('success', 'Prenotazione annullata. Gli amministratori sono stati avvisati.');
+        return back()->with(
+            'success',
+            'Prenotazione annullata. Gli admin sono stati avvisati.'
+        );
     }
+
 
 
 
