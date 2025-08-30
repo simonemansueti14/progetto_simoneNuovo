@@ -962,3 +962,9 @@ html, body {
 }
 
 /***********************/
+
+.orari-subtitle {
+    font-size: 1.2rem;     /* più piccolo del default */
+    font-weight: 600;      /* semibold */
+    color: #5c3d2e;        /* stesso marrone del resto */
+}

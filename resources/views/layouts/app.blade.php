@@ -46,7 +46,7 @@
                         <a href="{{ route('birre.index') }}">Birre</a>
                         <a href="{{ route('chi-siamo') }}">Chi Siamo</a>
                         <a href="{{ route('contatti') }}">Contatti</a>
-                        <a href="{{ route('prenotazioni') }}">Prenotazioni</a>
+                        <a href="{{ route('prenotazioni') }}">Degustazioni</a>
 
                         @auth
                             @can('access-admin')

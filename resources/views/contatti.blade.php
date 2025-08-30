@@ -23,9 +23,19 @@
         <div class="col-12">
             <div class="contact-card shadow-sm p-4">
                 <h4 class="mb-3 fs-3"><strong>Orari di apertura</strong></h4>
+                <h5 class="mb-3 fs-5 orari-subtitle"><strong>Spaccio</strong></h5>
+                <p><strong>Lunedì - Giovedì:</strong> Chiuso</p>
                 <p><strong>Venerdì:</strong> 16:00 - 20:00</p>
                 <p><strong>Sabato:</strong> 10:00 - 12:00 / 16:00 - 20:00</p>
                 <p><strong>Domenica:</strong> Chiuso</p>
+                <h5 class="mb-3 fs-5 orari-subtitle"><strong>Degustazioni (solo su prenotazione)</strong></h5>
+                <p><strong>Lunedì:</strong> Chiuso</p>
+                <p><strong>Martedì:</strong> 18:00 - 22:00</p>
+                <p><strong>Mercoledì:</strong> 18:00 - 22:00</p>
+                <p><strong>Giovedì:</strong> 18:00 - 22:00</p>
+                <p><strong>Venerdì:</strong> 16:00 - 22:00</p>
+                <p><strong>Sabato:</strong> 16:00 - 22:00</p>
+                <p><strong>Domenica:</strong> 16:00 - 22:00</p>
             </div>
         </div>
 
