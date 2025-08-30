@@ -10,8 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PrenotazioneCancellataMail;
 use App\Mail\PrenotazioneEliminataDaUtenteMail;
+use App\Mail\PrenotazioneCreataMail;
 use Illuminate\View\View;
-
 
 class PrenotazioneController extends Controller
 {
@@ -58,12 +58,11 @@ class PrenotazioneController extends Controller
                     return $fail('Giorno non valido.');
                 },
             ],
-            // 👇 minimo 4 posti
             'posti'  => ['required','integer','min:4','max:50'],
             'note'   => ['nullable','string','max:255'],
         ]);
 
-        Prenotazione::create([
+        $prenotazione = Prenotazione::create([
             'giorno'  => $request->giorno,
             'orario'  => $request->orario,
             'posti'   => $request->posti,
@@ -72,6 +71,12 @@ class PrenotazioneController extends Controller
             'user_id' => Auth::id(),
         ]);
 
+        // -----> NOTIFICA AGLI ADMIN per nuova prenotazione
+        $adminEmails = $this->adminEmails(); // array di email admin
+        if (!empty($adminEmails)) {
+            Mail::to($adminEmails)->send(new PrenotazioneCreataMail($prenotazione));
+        }
+
         return redirect()
             ->route('prenotazioni')
             ->with('success', 'Prenotazione salvata con successo!');
@@ -79,7 +84,6 @@ class PrenotazioneController extends Controller
 
     public function index()
     {
-        // ordino prima per giorno, poi per orario
         $prenotazioni = Prenotazione::query()
             ->orderByDesc('giorno')
             ->orderBy('orario')
@@ -88,11 +92,11 @@ class PrenotazioneController extends Controller
         return view('admin.prenotazioni.index', compact('prenotazioni'));
     }
 
+    // Eliminazione da parte dell'ADMIN: mail SOLO all'utente
     public function destroy(Prenotazione $prenotazione)
     {
         $email = optional($prenotazione->user)->email;
 
-        // invio email PRIMA di cancellare
         if ($email) {
             Mail::to($email)->send(new PrenotazioneCancellataMail($prenotazione));
         }
@@ -102,13 +106,14 @@ class PrenotazioneController extends Controller
         return back()->with(
             'success',
             'Prenotazione eliminata con successo.' .
-            ($email ? ' È stata inviata una email di notifica.' : ' (Nessuna email inviata: prenotazione senza utente collegato)')
+            ($email ? ' È stata inviata una email di notifica all’utente.' : ' (Nessuna email inviata: prenotazione senza utente collegato)')
         );
     }
 
+    // Lista “Le mie prenotazioni”
     public function mie(): View
     {
-        $userId = Auth::id(); // evita l’avviso di intelephense
+        $userId = Auth::id();
 
         $prenotazioni = Prenotazione::where('user_id', $userId)
             ->orderByDesc('giorno')
@@ -118,33 +123,29 @@ class PrenotazioneController extends Controller
         return view('prenotazioni.mie', compact('prenotazioni'));
     }
 
-   public function destroyMine(\App\Models\Prenotazione $prenotazione): \Illuminate\Http\RedirectResponse
+    // Eliminazione da parte dell’UTENTE: mail AGLI ADMIN
+    public function destroyMine(Prenotazione $prenotazione)
     {
-        // Solo il proprietario può cancellare la propria prenotazione
         if ($prenotazione->user_id !== Auth::id()) {
             abort(403, 'Non autorizzato.');
         }
 
-        // Recupera tutti gli admin
-        $admins = \App\Models\User::where('role', 'admin')->get();
+        $admins = $this->adminEmails();
 
-        foreach ($admins as $admin) {
-            if ($admin->email) {
-                Mail::to($admin->email)->send(new PrenotazioneCancellataMail($prenotazione));
-            }
+        if (!empty($admins)) {
+            Mail::to($admins)->send(new PrenotazioneEliminataDaUtenteMail(
+                $prenotazione,
+                Auth::user()
+            ));
         }
 
-        // Cancella la prenotazione
         $prenotazione->delete();
 
-        return back()->with(
-            'success',
-            'Prenotazione annullata. Gli admin sono stati avvisati.'
-        );
+        return back()->with('success', 'Prenotazione annullata. Gli admin sono stati avvisati.');
     }
 
-
-
-
-    
+    private function adminEmails(): array
+    {
+        return User::where('role', 'admin')->pluck('email')->filter()->all();
+    }
 }

@@ -1,16 +1,10 @@
+{{-- resources/views/emails/prenotazioni/cancellata.blade.php --}}
 @component('mail::message')
-# Cancellazione prenotazione
+# Prenotazione annullata
 
-Ciao {{ $p->nome }},
+La tua prenotazione del **{{ \Illuminate\Support\Carbon::parse($p->giorno)->format('d/m/Y') }}**
+alle **{{ \Illuminate\Support\Carbon::createFromTimeString($p->orario)->format('H:i') }}**
+è stata annullata dallo staff.
 
-la tua prenotazione è stata **annullata dall’amministratore**.
-
-- Giorno: {{ $p->giorno }}
-- Orario: {{ $p->orario }}
-- Posti: {{ $p->posti }}
-
-Se hai domande puoi rispondere a questa email.
-
-Grazie,  
-Lo Staff
+Se hai bisogno di info, rispondi a questa email.
 @endcomponent
