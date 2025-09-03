@@ -16,10 +16,7 @@ class User extends Authenticatable
     public const ROLE_USER  = 'user';
     public const ROLE_ADMIN = 'admin';
 
-    /**
-     * Valori di default degli attributi (utile se nel DB non hai default su 'role').
-     * Puoi rimuovere questo blocco se nel migration hai messo ->default('user').
-     */
+    
     protected $attributes = [
         'role' => self::ROLE_USER,
     ];
@@ -33,7 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // <--- importante per mass assignment
+        'role', 
     ];
 
     /**

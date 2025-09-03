@@ -17,7 +17,6 @@ class PrenotazioneController extends Controller
 {
     public function store(Request $request)
     {
-        // Validazioni base
         $request->validate([
             'giorno' => [
                 'required','date','after_or_equal:today',
@@ -37,7 +36,6 @@ class PrenotazioneController extends Controller
                     }
 
                     $t = Carbon::createFromFormat('H:i', $value);
-                    // mar(2)-gio(4): 18:00-22:00
                     if ($day->isTuesday() || $day->isWednesday() || $day->isThursday()) {
                         $min = Carbon::createFromTimeString('18:00');
                         $max = Carbon::createFromTimeString('22:00');
@@ -46,7 +44,6 @@ class PrenotazioneController extends Controller
                         }
                         return;
                     }
-                    // ven(5)-dom(0): 16:00-22:00
                     if ($day->isFriday() || $day->isSaturday() || $day->isSunday()) {
                         $min = Carbon::createFromTimeString('16:00');
                         $max = Carbon::createFromTimeString('22:00');
@@ -71,7 +68,7 @@ class PrenotazioneController extends Controller
             'user_id' => Auth::id(),
         ]);
 
-        // -----> NOTIFICA AGLI ADMIN per nuova prenotazione
+        // NOTIFICA AGLI ADMIN per nuova prenotazione
         $adminEmails = $this->adminEmails(); // array di email admin
         if (!empty($adminEmails)) {
             Mail::to($adminEmails)->send(new PrenotazioneCreataMail($prenotazione));
@@ -110,7 +107,7 @@ class PrenotazioneController extends Controller
         );
     }
 
-    // Lista “Le mie prenotazioni”
+   
     public function mie(): View
     {
         $userId = Auth::id();

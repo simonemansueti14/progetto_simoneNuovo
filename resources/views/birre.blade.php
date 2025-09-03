@@ -27,7 +27,6 @@
                 <h3 class="beer-name">POLOCK EN ROUGE</h3>
                 <p class="beer-type">SOUR FRUIT GRODZISKIE</p>
             </div>
-            <!-- Aggiungi altre birre qui -->
         </div>
 
         <!-- Bottone destra -->

@@ -7,36 +7,28 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            {{-- ===========================
-                 Aggiornamento profilo
-            =========================== --}}
+            {{-- Aggiornamento profilo --}}
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
                 </div>
             </div>
 
-            {{-- ===========================
-                 Cambio password
-            =========================== --}}
+            {{-- Cambio password --}}
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
 
-            {{-- ===========================
-                 Eliminazione account
-            =========================== --}}
+            {{-- Eliminazione account --}}
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')
                 </div>
             </div>
 
-            {{-- ===========================
-                 Le mie prenotazioni
-            =========================== --}}
+            {{-- Le mie prenotazioni --}}
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <h2 class="text-lg font-medium text-gray-900 mb-4">Le mie prenotazioni</h2>
 

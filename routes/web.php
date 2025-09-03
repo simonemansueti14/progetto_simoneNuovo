@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BirraController;
 use App\Http\Controllers\PrenotazioneController;
-use App\Http\Controllers\Admin\UserController as AdminUserController; // << aggiunto
+use App\Http\Controllers\Admin\UserController as AdminUserController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ Route::post('/prenotazioni', [PrenotazioneController::class, 'store'])
     ->middleware('auth')
     ->name('prenotazioni.store');
 
-// Lista birre (PUBBLICA)
+// Lista birre 
 Route::get('/birre', [BirraController::class, 'index'])->name('birre.index');
 
 /*
@@ -63,7 +63,6 @@ Route::middleware('auth')->delete(
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'is_user'])->group(function () {
-    // esempio: Route::get('/i-miei-ordini', [OrderController::class, 'index'])->name('orders.index');
 });
 
 /*
@@ -81,7 +80,7 @@ Route::middleware(['auth', 'is_admin'])
         Route::get('/prenotazioni', [PrenotazioneController::class, 'index'])->name('prenotazioni.index');
         Route::delete('/prenotazioni/{prenotazione}', [PrenotazioneController::class, 'destroy'])->name('prenotazioni.destroy');
 
-        // Utenti (admin)  << aggiunto
+        // Utenti (admin)
         Route::get('/utenti', [AdminUserController::class, 'index'])->name('utenti.index');
         Route::delete('/utenti/{user}', [AdminUserController::class, 'destroy'])->name('utenti.destroy');
 

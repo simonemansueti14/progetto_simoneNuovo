@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         // PRIMA (default Breeze):
         // return redirect()->intended(RouteServiceProvider::HOME);
 
-        // DOPO (vai sempre a /prenotazioni)
+        // DOPO (fa si che dopo il login torni a prenotazioni se eri li)
         return redirect()->intended(route('prenotazioni'));
     }
 

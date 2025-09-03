@@ -70,7 +70,6 @@
       </div>
       <div class="modal-body">
         <p id="deleteModalText" class="mb-0">
-          <!-- testo riempito via JS -->
         </p>
       </div>
       <div class="modal-footer">

@@ -9,5 +9,5 @@ class Birra extends Model
 {
     use HasFactory;
 
-    protected $table = 'birre'; // 👈 AGGIUNGI QUESTA RIGA
+    protected $table = 'birre'; 
 }

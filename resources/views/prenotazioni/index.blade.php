@@ -275,26 +275,26 @@
                     @endphp
                     {{ $email }}
                   </td>
-<td class="text-end text-nowrap">
+                  <td class="text-end text-nowrap">
 
 
-  {{-- Pulsante elimina con conferma (senza @json/addslashes) --}}
-  @php
-    $msg = "Confermi l'eliminazione della prenotazione di {$p->nome} del {$p->giorno} alle {$p->orario}?";
-  @endphp
-  <form
-      action="{{ route('prenotazioni.destroy', $p->id) }}"
-      method="POST"
-      class="d-inline"
-      data-confirm="{{ e($msg) }}"
-      onsubmit="return confirm(this.dataset.confirm);">
-      @csrf
-      @method('DELETE')
-      <button type="submit" class="btn btn-sm btn-danger">
-        <i class="bi bi-x-lg"></i>
-      </button>
-  </form>
-</td>
+                    {{-- Pulsante elimina con conferma (senza @json/addslashes) --}}
+                    @php
+                      $msg = "Confermi l'eliminazione della prenotazione di {$p->nome} del {$p->giorno} alle {$p->orario}?";
+                    @endphp
+                    <form
+                        action="{{ route('prenotazioni.destroy', $p->id) }}"
+                        method="POST"
+                        class="d-inline"
+                        data-confirm="{{ e($msg) }}"
+                        onsubmit="return confirm(this.dataset.confirm);">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">
+                          <i class="bi bi-x-lg"></i>
+                        </button>
+                    </form>
+                  </td>
                 </tr>
               @endforeach
             </tbody>

@@ -6,12 +6,6 @@ use App\Models\Birra;
 
 class BirraController extends Controller
 {
-    /*public function index()
-    {
-        $birre = Birra::all();
-        return view('birre.index', compact('birre'));
-    }*/
-
     public function index()
     {
         $egeria = Birra::where('nome', 'Egeria')->first();

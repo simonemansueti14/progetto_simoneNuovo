@@ -10,7 +10,6 @@ class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        // Cambia email/password come vuoi
         User::firstOrCreate(
             ['email' => 'simonemansueti@gmail.com'],
             [
